@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MVC Demo</title>
+</head>
+<body>
+  <h1>Data from JSON</h1>
+  <div id="data">
+    <img src="" alt="test   " id="squirrel">
+  </div>
+  <script>
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        const dataElement = document.getElementById('data');
+        const imgElement = document.createElement('img');
+        dataElement.innerHTML = JSON.stringify(data, null, 2);
+
+        imgElement.src = data.items[0].gifPath;
+        imgElement.alt = 'Squirrel Image';
+        dataElement.appendChild(imgElement);
+      })
+      .catch(error => console.error(error));
+  </script>
+</body>
+</html>
